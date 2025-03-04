@@ -1,0 +1,79 @@
+input::placeholder {
+    text-decoration-color: black;
+}
+
+input {
+    outline: none;
+    background: transparent;
+    border-color: inherit;
+    border: 0px solid;
+    width: 55%;
+    height: 30px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+button {
+    background-color: #536b748e;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 15px 32px;
+    font-size: 16px;
+    margin-top: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.form-container>div {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+    position: relative;
+}
+
+.form-group label {
+    width: 40%;
+    font-size: 14px;
+}
+
+i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+button :disabled {
+    background-color: #ccc;
+}
+
+span,
+a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+}

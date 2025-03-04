@@ -1,0 +1,49 @@
+create table restaurant (
+	id int PRIMARY KEY auto_increment,
+	name varchar(255) not null,
+	address varchar(255) not null,
+	phone varchar(255) not null,
+	cuisine varchar(255),
+	image varchar(255),
+	longitude DECIMAL(11, 8),
+	latitude DECIMAL(10, 8)
+);
+
+create table menu_items(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	restaurant_id INT,
+	name varchar(255) not null,
+	description TEXT,
+	price DECIMAL(10, 2) not null,
+	image varchar(255),
+	FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) on delete cascade
+);
+
+create table users(
+	id int PRIMARY KEY auto_increment,
+	username varchar(255) unique not null,
+	password VARCHAR(255) NOT NULL,
+	email varchar(255) unique not null,
+	address varchar(255),
+	phone varchar(255)
+);
+
+create table orders(
+	id int PRIMARY KEY auto_increment,
+	user_id INT,
+	restaurant_id INT,
+	order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	total_price DECIMAL(10, 2) not null,
+	status enum('pending', 'processing','delivered') default 'pending',
+	FOREIGN KEY (user_id) REFERENCES users(id) on delete cascade,
+	FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) on delete cascade
+);
+
+create table order_items(
+	id int PRIMARY KEY auto_increment,
+	order_id int,
+	menu_item_id int,
+	quantity int,
+	FOREIGN KEY (order_id) REFERENCES orders(id) on delete cascade,
+	FOREIGN KEY (menu_item_id) REFERENCES menu_items(id) on delete cascade
+);
