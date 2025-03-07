@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRestaurants } from '../features/restaurantSlice';
-import '../css/restaurantList.css';
+import {Button, CircularProgress, Card, CardContent, Typography, Grid} from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 
 const RestaurantList = () => {
@@ -28,30 +28,37 @@ const RestaurantList = () => {
   };
 
   return (
-    <div className='restaurant-list'>
-      <h1>Restaurant List</h1>
+    <div className='restaurant-list' style={{padding:'20px'}}>
+      <Typography variant='h4' gutterBottom>
+        Restaurant List
+      </Typography>
       {/* {isAdmin && (
         <button onClick={handleAddRestaurant} className='add-restaurant'>
           Add Restaurant
         </button>
       )} */}
-      {status === 'loading' && <p>Loading Restaurants...</p>}
-      {status === 'failed' && <p>Error Loading Restaurants...</p>}
+      {status === 'loading' && <CircularProgress/>}
+      {status === 'failed' && <Typography color='error'>Error Loading Restaurants...</Typography>}
 
       {/* Restaurant List */}
-      <div className="restaurant-items">
+      <Grid container spacing={3}>
         {Array.isArray(restaurants) && restaurants.length > 0 ? (
           restaurants.map((restaurant) => (
-            <div key={restaurant.id} className="restaurant-item" onClick={() => handleRestaurantClick(restaurant.id)}>
-              <h3>{restaurant.name}</h3>
-              <p>{restaurant.address}</p>
-              <p>{restaurant.cuisine}</p>
-            </div>
+            <Grid item xs={12} sm={6} md={4} key={restaurant.id}>
+              <Card onClick={() => handleRestaurantClick(restaurant.id)}
+                sx={{ cursor:'pointer', transition:'0.3s', '&:hover':{boxShadow:4}}}>
+                  <CardContent>
+                    <Typography variant='h6'>{restaurant.name}</Typography>
+                    <Typography color='textSecondary'>{restaurant.address}</Typography>
+                    <Typography variant='body2' color='textSecondary'>{restaurant.cuisine}</Typography>
+                  </CardContent>
+                </Card>
+            </Grid>
           ))
         ) : (
-          <p>No restaurants available</p>
+          <Typography>No restaurants available</Typography>
         )}
-      </div>
+      </Grid>
     </div>
   );
 };
